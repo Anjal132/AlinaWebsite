@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Alina Ojha — Associate Engagement Director at Busara Center for Behavioral Economics. Research leader in gender equity, health systems, and climate across the Global South.">
+  <meta property="og:title" content="Alina Ojha">
+  <meta property="og:description" content="Bridging behavioral science and development finance to tackle gender, health, and climate challenges across the Global South.">
+  <meta property="og:type" content="website">
+  <title>Alina Ojha</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:         #FAF7F2;
+      --green:      #1C4A3A;
+      --terracotta: #C4622D;
+      --ochre:      #8B7355;
+      --ink:        #1A1A1A;
+      --muted:      #6B6B6B;
+      --border:     #E0D8CE;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans:  'Inter', -apple-system, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── PROGRESS BAR ── */
+    .progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 2px;
+      width: 0%;
+      background: var(--terracotta);
+      z-index: 300;
+      transition: width 0.08s linear;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      padding: 1.4rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.35s, box-shadow 0.35s;
+    }
+    nav.scrolled {
+      background: rgba(250,247,242,0.96);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 1px 0 var(--border);
+    }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--green); }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px; height: 2px;
+      background: var(--ink);
+      transition: all 0.3s;
+    }
+
+    /* ── MOBILE NAV OVERLAY ── */
+    .nav-mobile {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 190;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.25rem;
+    }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a {
+      font-family: var(--serif);
+      font-size: 2.2rem;
+      font-weight: 500;
+      color: var(--ink);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-mobile a:hover { color: var(--green); }
+    .nav-mobile-close {
+      position: absolute;
+      top: 1.5rem; right: 1.75rem;
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: var(--muted);
+    }
+
+    /* ── SHARED ── */
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+    section { padding: 7rem 3rem; }
+
+    .section-label {
+      display: block;
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3.2vw, 2.75rem);
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.15;
+      margin-bottom: 3rem;
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 55% 45%;
+      align-items: center;
+      padding: 0 3rem;
+      padding-top: 5rem;
+      gap: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-text { padding-right: 4.5rem; padding-bottom: 2rem; }
+
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 1.25rem;
+      opacity: 0;
+      transform: translateY(14px);
+      animation: fadeUp 0.8s 0.1s forwards;
+    }
+    .hero-name {
+      font-family: var(--serif);
+      font-size: clamp(3.8rem, 6.5vw, 5.75rem);
+      font-weight: 700;
+      line-height: 1.02;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      transform: translateY(18px);
+      animation: fadeUp 0.9s 0.25s forwards;
+    }
+    .hero-org {
+      font-size: 0.88rem;
+      color: var(--muted);
+      font-weight: 400;
+      margin-bottom: 2.25rem;
+      opacity: 0;
+      transform: translateY(14px);
+      animation: fadeUp 0.8s 0.42s forwards;
+      letter-spacing: 0.01em;
+    }
+    .hero-statement {
+      font-family: var(--serif);
+      font-size: clamp(1rem, 1.3vw, 1.15rem);
+      font-style: italic;
+      color: var(--green);
+      line-height: 1.7;
+      border-left: 2px solid var(--terracotta);
+      padding-left: 1.25rem;
+      max-width: 460px;
+      opacity: 0;
+      transform: translateY(14px);
+      animation: fadeUp 0.8s 0.58s forwards;
+    }
+    .hero-cta {
+      margin-top: 2.75rem;
+      opacity: 0;
+      transform: translateY(12px);
+      animation: fadeUp 0.8s 0.72s forwards;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.82rem 2.25rem;
+      background: var(--green);
+      color: #fff;
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn:hover { background: #153829; transform: translateY(-2px); }
+
+    .hero-photo-wrap {
+      height: 82vh;
+      max-height: 700px;
+      opacity: 0;
+      animation: fadeIn 1.1s 0.5s forwards;
+      position: relative;
+    }
+    .hero-photo-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+
+    /* Hero decorative circle */
+    .hero-bg-circle {
+      position: absolute;
+      bottom: -120px; right: -100px;
+      width: 420px; height: 420px;
+      border-radius: 50%;
+      background: rgba(28,74,58,0.04);
+      pointer-events: none;
+    }
+
+    /* ── PHOTO PLACEHOLDERS ── */
+    .ph {
+      width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      color: rgba(0,0,0,0.22);
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .ph--hero {
+      background: linear-gradient(155deg, #E8D5C0 0%, #D4B896 55%, #C8A478 100%);
+    }
+    .ph--about {
+      background: linear-gradient(155deg, #D5E4D8 0%, #AECAB4 55%, #92B498 100%);
+    }
+    .ph-icon {
+      width: 44px; height: 44px;
+      border: 1.5px solid rgba(0,0,0,0.18);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.25rem;
+    }
+    .ph-icon svg { opacity: 0.45; }
+
+    /* ── ABOUT ── */
+    #about { background: #fff; }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .about-photo-wrap {
+      position: sticky;
+      top: 6.5rem;
+      height: 520px;
+    }
+    .about-photo-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .about-text .section-title { margin-bottom: 2rem; }
+
+    .about-text p {
+      font-size: 1.02rem;
+      line-height: 1.85;
+      color: #282828;
+      margin-bottom: 1.5rem;
+    }
+    .about-text p:last-of-type { margin-bottom: 0; }
+
+    .credentials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 2.5rem;
+    }
+    .cred {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.38rem 0.9rem;
+      border: 1px solid var(--border);
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+    }
+    .cred-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--terracotta);
+      flex-shrink: 0;
+    }
+
+    /* ── RESEARCH FOCUS ── */
+    #research { background: var(--bg); }
+
+    .focus-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.25rem;
+    }
+    .focus-card {
+      background: #fff;
+      border-top: 3px solid;
+      padding: 2.75rem 2.25rem;
+      transition: box-shadow 0.3s;
+    }
+    .focus-card:hover { box-shadow: 0 10px 44px rgba(0,0,0,0.07); }
+    .focus-card:nth-child(1) { border-color: var(--terracotta); }
+    .focus-card:nth-child(2) { border-color: var(--green); }
+    .focus-card:nth-child(3) { border-color: var(--ochre); }
+
+    .focus-num {
+      font-family: var(--serif);
+      font-size: 2.8rem;
+      font-weight: 700;
+      line-height: 1;
+      opacity: 0.1;
+      color: var(--ink);
+      margin-bottom: 1.1rem;
+    }
+    .focus-title {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 600;
+      line-height: 1.3;
+      color: var(--ink);
+      margin-bottom: 1rem;
+    }
+    .focus-desc {
+      font-size: 0.9rem;
+      line-height: 1.75;
+      color: var(--muted);
+      margin-bottom: 1.75rem;
+    }
+    .focus-projects {
+      list-style: none;
+      border-top: 1px solid var(--border);
+      padding-top: 1.25rem;
+    }
+    .focus-projects li {
+      font-size: 0.78rem;
+      color: var(--muted);
+      padding: 0.28rem 0 0.28rem 1rem;
+      position: relative;
+      line-height: 1.5;
+    }
+    .focus-projects li::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0.62rem;
+      width: 4px; height: 4px;
+      border-radius: 50%;
+    }
+    .focus-card:nth-child(1) .focus-projects li::before { background: var(--terracotta); }
+    .focus-card:nth-child(2) .focus-projects li::before { background: var(--green); }
+    .focus-card:nth-child(3) .focus-projects li::before { background: var(--ochre); }
+
+    /* ── PUBLICATIONS ── */
+    #publications { background: var(--green); }
+    #publications .section-label { color: rgba(255,255,255,0.45); }
+    #publications .section-title { color: #fff; margin-bottom: 1rem; }
+
+    .pub-list { list-style: none; margin-top: 2rem; }
+    .pub-item {
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 2rem;
+      padding: 1.9rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      text-decoration: none;
+      color: inherit;
+      align-items: start;
+      transition: opacity 0.2s;
+    }
+    .pub-item:first-child { border-top: 1px solid rgba(255,255,255,0.1); }
+    .pub-item:hover { opacity: 0.78; }
+
+    .pub-year {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.38);
+      letter-spacing: 0.05em;
+      padding-top: 0.28rem;
+    }
+    .pub-title {
+      font-family: var(--serif);
+      font-size: 1.08rem;
+      font-weight: 500;
+      line-height: 1.45;
+      color: #fff;
+      margin-bottom: 0.35rem;
+    }
+    .pub-meta {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.45);
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .pub-arrow { color: var(--terracotta); }
+
+    .pub-view-all {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 2.5rem;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .pub-view-all:hover { color: #fff; }
+
+    /* ── PARTNERS ── */
+    #partners { background: #fff; }
+
+    .partners-lead {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 520px;
+      margin-bottom: 3.5rem;
+    }
+    .logo-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+    }
+    .logo-cell {
+      height: 78px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.25rem;
+      transition: border-color 0.25s, opacity 0.25s;
+      opacity: 0.5;
+    }
+    .logo-cell:hover { opacity: 0.85; border-color: #c0b5a8; }
+    .logo-img {
+      max-width: 100%;
+      max-height: 40px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      filter: grayscale(1);
+      display: block;
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--bg);
+      text-align: center;
+    }
+    .contact-heading {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3.5vw, 2.9rem);
+      font-weight: 600;
+      line-height: 1.2;
+      max-width: 580px;
+      margin: 0 auto 1.25rem;
+      color: var(--ink);
+    }
+    .contact-sub {
+      font-size: 1rem;
+      color: var(--muted);
+      margin-bottom: 3rem;
+    }
+    .contact-email {
+      font-family: var(--serif);
+      font-size: clamp(1.3rem, 2.5vw, 1.75rem);
+      color: var(--green);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+      display: inline-block;
+      margin-bottom: 1.5rem;
+    }
+    .contact-email:hover { border-color: var(--green); }
+    .contact-meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    .contact-meta a {
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    .contact-meta a:hover { color: var(--green); }
+    .contact-divider {
+      width: 1px; height: 12px;
+      background: var(--border);
+      display: inline-block;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      color: rgba(255,255,255,0.35);
+      padding: 1.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+    }
+    footer a { color: rgba(255,255,255,0.35); text-decoration: none; }
+    footer a:hover { color: rgba(255,255,255,0.65); }
+
+    /* ── KEYFRAMES ── */
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+
+      #hero {
+        grid-template-columns: 1fr;
+        padding: 7rem 1.5rem 3rem;
+        gap: 2.5rem;
+        min-height: auto;
+      }
+      .hero-text { padding-right: 0; padding-bottom: 0; }
+      .hero-photo-wrap { height: 55vw; max-height: 420px; }
+
+      section { padding: 4.5rem 1.5rem; }
+
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about-photo-wrap { position: relative; top: auto; height: 280px; }
+
+      .focus-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+
+      .pub-item { grid-template-columns: 50px 1fr; gap: 1.25rem; }
+
+      .logo-grid { grid-template-columns: repeat(2, 1fr); }
+
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-name { font-size: 3.2rem; }
+      .contact-meta { flex-direction: column; gap: 0.75rem; }
+      .contact-divider { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a href="#hero" class="nav-logo">Alina Ojha</a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#partners">Partners</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger-btn" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="nav-mobile" id="mobile-nav" role="dialog" aria-label="Navigation">
+  <button class="nav-mobile-close" id="mobile-close" aria-label="Close menu">✕</button>
+  <a href="#about"         onclick="closeMobile()">About</a>
+  <a href="#research"      onclick="closeMobile()">Research</a>
+  <a href="#publications"  onclick="closeMobile()">Publications</a>
+  <a href="#partners"      onclick="closeMobile()">Partners</a>
+  <a href="#contact"       onclick="closeMobile()">Contact</a>
+</div>
+
+<main>
+
+  <!-- ── HERO ── -->
+  <section id="hero">
+    <div class="hero-text">
+      <p class="hero-eyebrow">Associate Engagement Director</p>
+      <h1 class="hero-name">Alina<br>Ojha</h1>
+      <p class="hero-org">Busara Center for Behavioral Economics &nbsp;·&nbsp; Nairobi, Kenya</p>
+      <p class="hero-statement">"Bridging behavioral science and development finance to tackle gender, health, and climate challenges across the Global South."</p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn">Get in Touch</a>
+      </div>
+    </div>
+
+    <div class="hero-photo-wrap">
+      <img src="hero1.JPG" alt="Alina Ojha" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;">
+    </div>
+
+    <div class="hero-bg-circle"></div>
+  </section>
+
+  <!-- ── ABOUT ── -->
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+
+        <div class="about-photo-wrap reveal">
+          <img src="working1.jpg" alt="Alina Ojha at work" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;">
+        </div>
+
+        <div class="about-text reveal">
+          <span class="section-label">About</span>
+          <h2 class="section-title">Researcher.<br>Strategist.<br>Connector.</h2>
+          <p>Alina Ojha works at the intersection of behavioral science, development economics, and social change — leading research programs and client partnerships at the Busara Center for Behavioral Economics in Nairobi, where she has grown from Research Associate to Senior Associate and now Engagement Director over five years.</p>
+          <p>Her path into this work began in Stockholm and Paris, where a dual Master's in Economics and International Development — and a Bertil Ohlin Scholarship for best thesis — sharpened her research instincts. Her graduate work took her to rural Nepal, where she used experimental methods to estimate the true prevalence of Chhaupadi, a practice that forces menstruating women into isolation. That early encounter with measurement in sensitive contexts shaped a career defined by methodological care and human stakes.</p>
+          <p>At Busara, Alina oversees mixed-method and experimental research across Kenya, Tanzania, Zambia, Nepal, Mexico, and beyond. She manages partnerships with foundations, NGOs, and development finance institutions — translating rigorous behavioral evidence into programs and investments that shift behavior at scale. Her work spans three interconnected themes: gender equity and the care economy, health systems and vaccine confidence, and behavioral approaches to climate and environment.</p>
+          <div class="credentials">
+            <span class="cred"><span class="cred-dot"></span>MSc Economics — Stockholm School of Economics</span>
+            <span class="cred"><span class="cred-dot"></span>MA International Development — Sciences Po</span>
+            <span class="cred"><span class="cred-dot"></span>Bertil Ohlin Scholarship, Best Masters Thesis, 2020</span>
+            <span class="cred"><span class="cred-dot"></span>Based in Nairobi, Kenya</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── RESEARCH FOCUS AREAS ── -->
+  <section id="research">
+    <div class="container">
+      <span class="section-label reveal">Focus Areas</span>
+      <h2 class="section-title reveal">Three threads.<br>One through-line.</h2>
+      <div class="focus-grid">
+
+        <div class="focus-card reveal">
+          <div class="focus-num">01</div>
+          <h3 class="focus-title">Gender &amp; Care Economy</h3>
+          <p class="focus-desc">Alina studies the systems that make women's work invisible — and the interventions that can change that. From diagnosing social norms around unpaid care in Kenya, Zimbabwe, and the UK, to documenting how impact investing can reduce the domestic burden across three continents, her research moves from diagnosis to design: testing counter-narratives, modeling impact pathways, and informing how funders deploy capital.</p>
+          <ul class="focus-projects">
+            <li>Social norms &amp; counter-narratives on care work — Oxfam (2023–24)</li>
+            <li>Care economy impact investing case studies across SSA, Asia, LATAM — IDRC (2021–24)</li>
+            <li>Gender-related indicators mapping across Education, GBV, Economic Empowerment — ODI (2019–20)</li>
+            <li>Beijing Platform +25: gender norms &amp; women in politics — ODI / ALIGN (2020)</li>
+          </ul>
+        </div>
+
+        <div class="focus-card reveal">
+          <div class="focus-num">02</div>
+          <h3 class="focus-title">Behavioral Science &amp; Health</h3>
+          <p class="focus-desc">From vaccine hesitancy in Nepal to antibiotic resistance across East and Southern Africa, Alina applies behavioral frameworks to health challenges where human behavior is both the problem and the lever. Her collaboration with Save the Children on VAXUP Nepal produced the <em>Little Jab Book</em> — a practitioner playbook distilling behavioral strategies for vaccine uptake in communities with limited institutional trust.</p>
+          <ul class="focus-projects">
+            <li>VAXUP vaccine acceptance &amp; uptake project, Nepal — Save the Children (2021)</li>
+            <li>Antibiotic knowledge &amp; AMR study across Tanzania, Ethiopia, Zambia &amp; Zimbabwe — Wellcome Trust (2022)</li>
+            <li>Co-instructor, graduate course on inclusive development policy — University of Chicago (2020)</li>
+          </ul>
+        </div>
+
+        <div class="focus-card reveal">
+          <div class="focus-num">03</div>
+          <h3 class="focus-title">Climate &amp; Environment</h3>
+          <p class="focus-desc">Alina brings behavioral economics to climate action — both through direct research on clean cookstove adoption in Kenya and through capacity work that shapes how major climate funds think about behavior change. Her co-authored IEU Learning Paper helped inform how a $10 billion fund integrates behavioral insights into climate investments across the Global South.</p>
+          <ul class="focus-projects">
+            <li>Product labeling to drive clean cookstove uptake, Kenya — Clean Cooking Alliance (Ongoing)</li>
+            <li>Behavioral Science in Climate Change training for 17 GCF direct-access entities (2021)</li>
+            <li>IEU Learning Paper: Behavioural Science, Decision Making &amp; Climate Investments — Green Climate Fund (2021)</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PUBLICATIONS ── -->
+  <section id="publications">
+    <div class="container">
+      <span class="section-label reveal">Selected Work</span>
+      <h2 class="section-title reveal">Publications &amp; Reports</h2>
+
+      <ul class="pub-list">
+
+        <li>
+          <a class="pub-item reveal" href="https://policy-practice.oxfam.org/resources/reframing-narratives-around-care-and-informal-work-in-kenya-the-uk-and-zimbabwe-621587/" target="_blank" rel="noopener noreferrer">
+            <span class="pub-year">2024</span>
+            <div>
+              <p class="pub-title">Reframing Narratives Around Care and Informal Work in Kenya, the UK and Zimbabwe: A Synthesis of National Research</p>
+              <p class="pub-meta">Oxfam International <span class="pub-arrow">↗</span></p>
+            </div>
+          </a>
+        </li>
+
+        <li>
+          <a class="pub-item reveal" href="https://policy-practice.oxfam.org/resources/shifting-narratives-to-value-unpaid-and-informal-work-in-kenya-621596/" target="_blank" rel="noopener noreferrer">
+            <span class="pub-year">2024</span>
+            <div>
+              <p class="pub-title">Shifting Narratives to Value Unpaid and Informal Work in Kenya</p>
+              <p class="pub-meta">Oxfam International <span class="pub-arrow">↗</span></p>
+            </div>
+          </a>
+        </li>
+
+        <li>
+          <a class="pub-item reveal" href="https://www.the-care-economy-knowledge-hub.org/wp-content/uploads/2024/02/JupViec-Case-Study-PDF.pdf" target="_blank" rel="noopener noreferrer">
+            <span class="pub-year">2024</span>
+            <div>
+              <p class="pub-title">Transforming the Care Economy through Impact Investing: JupViec.vn (Vietnam)</p>
+              <p class="pub-meta">Care Economy Knowledge Hub &nbsp;·&nbsp; IDRC <span class="pub-arrow">↗</span></p>
+            </div>
+          </a>
+        </li>
+
+        <li>
+          <a class="pub-item reveal" href="https://resourcecentre.savethechildren.net/document/the-little-jab-book-a-playbook-for-covid-19-vaccination-in-nepal" target="_blank" rel="noopener noreferrer">
+            <span class="pub-year">2021</span>
+            <div>
+              <p class="pub-title">The Little Jab Book: A Playbook for COVID-19 Vaccination in Nepal</p>
+              <p class="pub-meta">Save the Children &nbsp;·&nbsp; Busara Center for Behavioral Economics <span class="pub-arrow">↗</span></p>
+            </div>
+          </a>
+        </li>
+
+        <li>
+          <a class="pub-item reveal" href="https://ieu.greenclimate.fund/document/behavioural-science-decision-making-and-climate-investments" target="_blank" rel="noopener noreferrer">
+            <span class="pub-year">2021</span>
+            <div>
+              <p class="pub-title">Behavioural Science, Decision Making and Climate Investments</p>
+              <p class="pub-meta">Independent Evaluation Unit &nbsp;·&nbsp; Green Climate Fund <span class="pub-arrow">↗</span></p>
+            </div>
+          </a>
+        </li>
+
+        <li>
+          <a class="pub-item reveal" href="https://odi.org/en/publications/gender-norms-and-women-in-politics-evaluating-progress-and-identifying-challenges-on-the-25th-anniversary-of-the-beijing-platform/" target="_blank" rel="noopener noreferrer">
+            <span class="pub-year">2020</span>
+            <div>
+              <p class="pub-title">Gender Norms and Women in Politics: Evaluating Progress on the 25th Anniversary of the Beijing Platform</p>
+              <p class="pub-meta">Overseas Development Institute &nbsp;·&nbsp; ALIGN Platform <span class="pub-arrow">↗</span></p>
+            </div>
+          </a>
+        </li>
+
+        <li>
+          <a class="pub-item reveal" href="https://odi.org/en/publications/gender-power-and-progress-how-norms-change/" target="_blank" rel="noopener noreferrer">
+            <span class="pub-year">2020</span>
+            <div>
+              <p class="pub-title">Gender, Power and Progress: How Norms Change</p>
+              <p class="pub-meta">Overseas Development Institute <span class="pub-arrow">↗</span></p>
+            </div>
+          </a>
+        </li>
+
+      </ul>
+
+      <a href="https://scholar.google.com/citations?user=WfbZwTgAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" class="pub-view-all reveal">
+        View full publication record &nbsp;↗
+      </a>
+    </div>
+  </section>
+
+  <!-- ── PARTNERS ── -->
+  <section id="partners">
+    <div class="container">
+      <span class="section-label reveal">Partners &amp; Institutions</span>
+      <h2 class="section-title reveal">Organizations she's worked with</h2>
+      <p class="partners-lead reveal">Clients and funders that have trusted Alina's research leadership — from global health foundations to development finance institutions.</p>
+      <div class="logo-grid">
+        <div class="logo-cell reveal"><img class="logo-img" src="logos/oxfam.svg" alt="Oxfam"></div>
+        <div class="logo-cell reveal"><img class="logo-img" src="logos/wellcome.svg" alt="Wellcome Trust"></div>
+        <div class="logo-cell reveal"><img class="logo-img" src="logos/save-the-children.svg" alt="Save the Children"></div>
+        <div class="logo-cell reveal"><img class="logo-img" src="logos/gcf.png" alt="Green Climate Fund"></div>
+        <div class="logo-cell reveal"><img class="logo-img" src="logos/idrc.svg" alt="IDRC"></div>
+        <div class="logo-cell reveal"><img class="logo-img" src="logos/clean-cooking.png" alt="Clean Cooking Alliance"></div>
+        <div class="logo-cell reveal"><img class="logo-img" src="logos/odi.svg" alt="Overseas Development Institute"></div>
+        <div class="logo-cell reveal"><img class="logo-img" src="logos/uchicago.svg" alt="University of Chicago"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT ── -->
+  <section id="contact">
+    <div class="container">
+      <span class="section-label reveal">Contact</span>
+      <h2 class="contact-heading reveal">Interested in research collaboration or funding partnerships?</h2>
+      <p class="contact-sub reveal">Get in touch.</p>
+      <div class="reveal">
+        <a href="mailto:alina.ojha@busara.global" class="contact-email">alina.ojha@busara.global</a>
+        <div class="contact-meta">
+          <a href="https://ke.linkedin.com/in/alinaojha" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <span class="contact-divider"></span>
+          <a href="https://scholar.google.com/citations?user=WfbZwTgAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Google Scholar</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <span>Alina Ojha &nbsp;—&nbsp; Associate Engagement Director, Busara Center for Behavioral Economics</span>
+  <span><a href="mailto:alina.ojha@busara.global">alina.ojha@busara.global</a> &nbsp;·&nbsp; © 2026</span>
+</footer>
+
+<script>
+  // ── Progress bar
+  const progress = document.getElementById('progress');
+  window.addEventListener('scroll', () => {
+    const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+    progress.style.width = (pct * 100) + '%';
+  }, { passive: true });
+
+  // ── Nav: scrolled state
+  const nav = document.getElementById('main-nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 60);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // ── Mobile menu
+  const hamburger = document.getElementById('hamburger-btn');
+  const mobileNav = document.getElementById('mobile-nav');
+  hamburger.addEventListener('click', () => mobileNav.classList.add('open'));
+  document.getElementById('mobile-close').addEventListener('click', closeMobile);
+  function closeMobile() { mobileNav.classList.remove('open'); }
+
+  // ── Scroll reveal (iOS-safe)
+  const revealEls = document.querySelectorAll('.reveal');
+
+  function makeVisible(el) { el.classList.add('visible'); }
+
+  // Check if element is already in viewport
+  function inViewport(el) {
+    const r = el.getBoundingClientRect();
+    return r.top < window.innerHeight && r.bottom > 0;
+  }
+
+  if ('IntersectionObserver' in window) {
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          makeVisible(e.target);
+          revealObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.05 }); // no negative rootMargin — breaks on small viewports
+
+    revealEls.forEach(el => {
+      if (inViewport(el)) { makeVisible(el); } // elements visible on load
+      else { revealObs.observe(el); }
+    });
+  } else {
+    revealEls.forEach(makeVisible); // fallback: show everything
+  }
+
+  // iOS safety net: after 1s, reveal anything still in viewport
+  setTimeout(() => {
+    revealEls.forEach(el => { if (!el.classList.contains('visible') && inViewport(el)) makeVisible(el); });
+  }, 1000);
+
+  // ── Stagger delays for grids
+  document.querySelectorAll('.focus-grid .focus-card').forEach((el, i) => {
+    el.style.transitionDelay = `${i * 0.1}s`;
+  });
+  document.querySelectorAll('.logo-grid .logo-cell').forEach((el, i) => {
+    el.style.transitionDelay = `${(i % 4) * 0.08}s`;
+  });
+  document.querySelectorAll('.pub-list .pub-item').forEach((el, i) => {
+    el.style.transitionDelay = `${i * 0.07}s`;
+  });
+
+  // ── Active nav link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const activeObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
+      }
+    });
+  }, { threshold: 0.45 });
+  sections.forEach(s => activeObs.observe(s));
+</script>
+
+</body>
+</html>
